@@ -15,7 +15,7 @@
     <style>
         body {
             font-family: 'Assistant', sans-serif;
-            background-color: #f3f4f6;
+            background-color: #f8fafc;
         }
         .required::after {
             content: " *";
@@ -24,46 +24,54 @@
         textarea {
             resize: none;
         }
+        /* אנימציה חלקה להופעת אלמנטים */
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
-<body class="py-10 px-4">
+<body class="py-6 px-4 md:py-12">
 
-    <div class="max-w-md mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+    <div class="max-w-md mx-auto bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100 fade-in">
         
         <!-- Header -->
         <div class="bg-slate-800 p-8 text-white text-center">
             <h1 class="text-3xl font-bold tracking-tight">ק.ק גנרטורים</h1>
-            <p class="text-slate-400 mt-2">טופס הגשת מועמדות לעבודה</p>
+            <p class="text-slate-400 mt-2 font-light">הצטרפו לצוות המקצועי שלנו</p>
         </div>
 
         <!-- Form Section -->
         <div class="p-8 space-y-6" id="formContainer">
             
             <!-- שם מלא -->
-            <div>
-                <label class="block text-sm font-bold text-gray-700 mb-2 required">שם מלא:</label>
+            <div class="space-y-1">
+                <label class="block text-sm font-bold text-gray-700 required">שם מלא:</label>
                 <input type="text" id="candidateName" placeholder="הכנס שם מלא" 
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all">
+                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-50/50 outline-none transition-all">
             </div>
 
             <!-- נייד -->
-            <div>
-                <label class="block text-sm font-bold text-gray-700 mb-2 required">נייד:</label>
+            <div class="space-y-1">
+                <label class="block text-sm font-bold text-gray-700 required">נייד:</label>
                 <input type="tel" id="candidatePhone" placeholder="05X-XXXXXXX" dir="ltr"
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-right">
+                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-50/50 outline-none transition-all text-right">
             </div>
 
-            <!-- רישיון נהיגה - ללא סוגריים בכותרת -->
+            <!-- רישיון נהיגה -->
             <div class="space-y-3">
                 <label class="block text-sm font-bold text-gray-700 required">רישיון נהיגה:</label>
                 <div class="grid grid-cols-1 gap-2">
-                    <label class="flex items-center p-3 border rounded-xl cursor-pointer hover:bg-blue-50 transition-all has-[:checked]:bg-blue-100 has-[:checked]:border-blue-500">
+                    <label class="group flex items-center p-3 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500">
                         <input type="radio" name="licenseType" value="ידני" class="hidden">
-                        <span class="font-medium text-gray-700">ידני (יתרון משמעותי)</span>
+                        <span class="font-medium text-gray-700 group-has-[:checked]:text-blue-700">ידני (יתרון משמעותי)</span>
                     </label>
-                    <label class="flex items-center p-3 border rounded-xl cursor-pointer hover:bg-blue-50 transition-all has-[:checked]:bg-blue-100 has-[:checked]:border-blue-500">
+                    <label class="group flex items-center p-3 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500">
                         <input type="radio" name="licenseType" value="אוטומט" class="hidden">
-                        <span class="font-medium text-gray-700">אוטומט</span>
+                        <span class="font-medium text-gray-700 group-has-[:checked]:text-blue-700">אוטומט</span>
                     </label>
                 </div>
             </div>
@@ -72,74 +80,102 @@
             <div class="space-y-3">
                 <label class="block text-sm font-bold text-gray-700 required">האם יש לך רקע טכני?</label>
                 <div class="flex gap-4">
-                    <label class="flex-1 flex items-center justify-center p-3 border rounded-xl cursor-pointer hover:bg-blue-50 transition-all has-[:checked]:bg-blue-100 has-[:checked]:border-blue-500">
+                    <label class="flex-1 flex items-center justify-center p-3 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500">
                         <input type="radio" name="technicalBackground" value="כן" class="hidden">
                         <span class="font-medium text-gray-700">כן</span>
                     </label>
-                    <label class="flex-1 flex items-center justify-center p-3 border rounded-xl cursor-pointer hover:bg-blue-50 transition-all has-[:checked]:bg-blue-100 has-[:checked]:border-blue-500">
+                    <label class="flex-1 flex items-center justify-center p-3 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500">
                         <input type="radio" name="technicalBackground" value="לא" class="hidden">
                         <span class="font-medium text-gray-700">לא</span>
                     </label>
                 </div>
             </div>
 
-            <!-- ניסיון קודם - מלל חופשי -->
-            <div>
-                <label class="block text-sm font-bold text-gray-700 mb-2 required">פירוט ניסיון קודם:</label>
-                <textarea id="experienceDetail" rows="4" placeholder="ספר לנו על הניסיון המקצועי שלך (מכונאות, חשמל, מקומות עבודה קודמים וכו')..." 
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"></textarea>
-            </div>
-
-            <!-- שירות צבאי -->
-            <div>
-                <label class="block text-sm font-bold text-gray-700 mb-2 required">שירות צבאי:</label>
-                <select id="armyService" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all">
-                    <option value="מלא">מלא</option>
-                    <option value="חלקי">חלקי</option>
-                    <option value="לא רלוונטי">לא רלוונטי</option>
+            <!-- בחר תחום ניסיון -->
+            <div class="space-y-1">
+                <label class="block text-sm font-bold text-gray-700 required">בחר תחום ניסיון:</label>
+                <select id="experienceType" onchange="toggleExperienceRequired()" 
+                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-50/50 outline-none transition-all appearance-none bg-no-repeat bg-[left_1rem_center] bg-[length:1em_1em]" style="background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 fill=%22none%22 viewBox=%220 0 20 20%22%3E%3Cpath stroke=%22%236b7280%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%221.5%22 d=%22M6 8l4 4 4-4%22%2F%3E%3C%2Fsvg%3E');">
+                    <option value="" disabled selected>בחר תחום ניסיון</option>
+                    <option value="מכונאות">מכונאות</option>
+                    <option value="חשמל">חשמל</option>
+                    <option value="גם וגם">גם וגם</option>
+                    <option value="ללא ניסיון">ללא ניסיון</option>
                 </select>
             </div>
 
-            <!-- עיר מגורים -->
-            <div>
-                <label class="block text-sm font-bold text-gray-700 mb-2 required">עיר מגורים:</label>
-                <input type="text" id="candidateCity" placeholder="איפה אתה גר?" 
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all">
+            <!-- פירוט ניסיון קודם -->
+            <div class="space-y-1">
+                <label id="experienceLabel" class="block text-sm font-bold text-gray-700">פירוט ניסיון קודם:</label>
+                <textarea id="experienceDetail" rows="3" placeholder="פרט כאן על הניסיון שלך..." 
+                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-50/50 outline-none transition-all"></textarea>
+            </div>
+
+            <!-- שירות צבאי ועיר -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-sm font-bold text-gray-700 required">שירות צבאי:</label>
+                    <select id="armyService" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none transition-all">
+                        <option value="מלא">מלא</option>
+                        <option value="חלקי">חלקי</option>
+                        <option value="לא רלוונטי">לא רלוונטי</option>
+                    </select>
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-sm font-bold text-gray-700 required">עיר מגורים:</label>
+                    <input type="text" id="candidateCity" placeholder="עיר" 
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none transition-all">
+                </div>
             </div>
 
             <!-- Submit Button -->
-            <button onclick="sendWhatsApp()" 
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-2xl shadow-lg transform active:scale-95 transition-all flex items-center justify-center gap-2 text-xl mt-4">
-                שלח מועמדות למנהל
+            <button onclick="sendWhatsApp(this)" id="submitBtn"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-2xl shadow-xl transform active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-xl mt-4 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span>שלח מועמדות למנהל</span>
             </button>
         </div>
 
         <!-- Success Message -->
-        <div id="successMessage" class="hidden p-12 text-center space-y-6">
+        <div id="successMessage" class="hidden p-12 text-center space-y-6 fade-in">
             <div class="text-green-500 mx-auto w-20 h-20 border-4 border-green-500 rounded-full flex items-center justify-center">
                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path></svg>
             </div>
             <div>
-                <h2 class="text-3xl font-bold text-gray-800">תודה רבה!</h2>
-                <p class="text-gray-600 mt-2 text-lg">מעבירים אותך לוואטסאפ לשליחה...</p>
+                <h2 class="text-3xl font-bold text-gray-800">מעולה!</h2>
+                <p class="text-gray-600 mt-2 text-lg font-light">אנחנו מעבירים אותך לוואטסאפ לסיים את התהליך...</p>
             </div>
         </div>
 
-        <div id="msgBox" class="hidden m-6 p-4 bg-red-50 text-red-600 rounded-xl text-center text-sm font-bold border border-red-100"></div>
+        <div id="msgBox" class="hidden m-6 p-4 bg-red-50 text-red-600 rounded-xl text-center text-sm font-bold border border-red-100 fade-in"></div>
 
-        <div class="bg-gray-50 p-6 text-center text-xs text-gray-400 border-t">
-            ק.ק גנרטורים &copy; כל הזכויות שמורות
+        <div class="bg-gray-50 p-6 text-center text-[10px] uppercase tracking-widest text-gray-400 border-t">
+            ק.ק גנרטורים &copy; המערכת לניהול מועמדים
         </div>
     </div>
 
     <script>
-        function sendWhatsApp() {
+        function toggleExperienceRequired() {
+            const expType = document.getElementById('experienceType').value;
+            const label = document.getElementById('experienceLabel');
+            const detailArea = document.getElementById('experienceDetail');
+            
+            if (expType && expType !== "ללא ניסיון") {
+                label.classList.add('required');
+                detailArea.placeholder = "נא פרט כאן על הניסיון המקצועי שלך (חובה)...";
+            } else {
+                label.classList.remove('required');
+                detailArea.placeholder = "פרט כאן אם יש לך ניסיון רלוונטי נוסף (אופציונלי)...";
+            }
+        }
+
+        function sendWhatsApp(btn) {
             const myNumber = "972535545534"; 
             
             const name = document.getElementById('candidateName').value.trim();
             const phone = document.getElementById('candidatePhone').value.trim();
             const city = document.getElementById('candidateCity').value.trim();
-            const experience = document.getElementById('experienceDetail').value.trim();
+            const experienceType = document.getElementById('experienceType').value;
+            const experienceDetail = document.getElementById('experienceDetail').value.trim();
             const army = document.getElementById('armyService').value;
             
             const license = document.querySelector('input[name="licenseType"]:checked')?.value;
@@ -147,15 +183,23 @@
             
             const msgBox = document.getElementById('msgBox');
 
-            // וולידציה
-            if (!name || !phone || !city || !experience || !license || !techBackground) {
-                msgBox.innerText = "נא למלא את כל שדות החובה המסומנים בכוכבית";
+            if (!name || !phone || !city || !experienceType || !license || !techBackground) {
+                msgBox.innerText = "אופס! שכחת למלא חלק משדות החובה";
                 msgBox.classList.remove('hidden');
                 return;
             }
-            msgBox.classList.add('hidden');
 
-            // הצגת הודעת הצלחה
+            if (experienceType !== "ללא ניסיון" && !experienceDetail) {
+                msgBox.innerText = "נא פרט מעט על הניסיון המקצועי שציינת";
+                msgBox.classList.remove('hidden');
+                document.getElementById('experienceDetail').focus();
+                return;
+            }
+
+            msgBox.classList.add('hidden');
+            btn.disabled = true;
+            btn.innerHTML = "מעבד...";
+
             document.getElementById('formContainer').classList.add('hidden');
             document.getElementById('successMessage').classList.remove('hidden');
 
@@ -163,18 +207,19 @@
                          `----------------------------------\n` +
                          `👤 *שם מלא:* ${name}\n` +
                          `📱 *נייד:* ${phone}\n` +
-                         `📍 *עיר מגורים:* ${city}\n\n` +
+                         `📍 *עיר:* ${city}\n\n` +
                          `🚗 *רישיון נהיגה:* ${license}\n` +
                          `⚙️ *רקע טכני:* ${techBackground}\n` +
+                         `🛠️ *תחום ניסיון:* ${experienceType}\n` +
                          `🇮🇱 *שירות צבאי:* ${army}\n` +
                          `----------------------------------\n` +
-                         `🛠️ *ניסיון קודם:* \n${experience}\n` +
+                         `📝 *פירוט:* ${experienceDetail || 'ללא'}\n` +
                          `----------------------------------\n` +
-                         `נא לחזור אלי לתיאום ראיון.`;
+                         `נשלח דרך טופס הגיוס המהיר.`;
 
             setTimeout(() => {
                 window.location.href = `https://wa.me/${myNumber}?text=${encodeURIComponent(text)}`;
-            }, 1000);
+            }, 800);
         }
     </script>
 </body>
