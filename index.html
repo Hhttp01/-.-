@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ק.ק גנרטורים - הגשת מועמדות</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #f4f7f9;
+        }
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="py-8 px-4">
+
+    <div class="max-w-md mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        
+        <!-- בחירת שפה -->
+        <div class="flex justify-end p-3 gap-2 bg-gray-50 border-b">
+            <button onclick="setLanguage('he')" class="text-xs font-bold px-2 py-1 rounded bg-blue-100 text-blue-700">עברית</button>
+            <button onclick="setLanguage('ar')" class="text-xs font-bold px-2 py-1 rounded bg-gray-200 text-gray-600">العربية</button>
+        </div>
+
+        <!-- מחוון התקדמות -->
+        <div class="w-full bg-gray-200 h-2">
+            <div id="progressBar" class="bg-blue-600 h-2 progress-bar" style="width: 0%"></div>
+        </div>
+
+        <!-- Header -->
+        <div class="bg-gray-800 p-6 text-white text-center">
+            <h1 class="text-3xl font-bold" id="titleText">ק.ק גנרטורים</h1>
+            <p class="text-gray-300 mt-2 font-medium" id="subtitleText">הצטרפו לנבחרת המקצוענים שלנו</p>
+        </div>
+
+        <!-- Form Section -->
+        <div class="p-6 space-y-5" id="formContainer">
+            
+            <div class="space-y-4">
+                <!-- פרטים אישיים -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1" id="labelName">שם מלא:</label>
+                    <input type="text" id="candidateName" oninput="updateProgress()" placeholder="הכנס שם מלא" 
+                        class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1" id="labelPhone">מספר טלפון:</label>
+                    <input type="tel" id="candidatePhone" oninput="updateProgress()" placeholder="05X-XXXXXXX" dir="ltr"
+                        class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all text-right">
+                </div>
+
+                <!-- עיר מגורים (הצעה 1) -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1" id="labelCity">עיר מגורים:</label>
+                    <input type="text" id="candidateCity" oninput="updateProgress()" placeholder="איפה אתה גר?" 
+                        class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1" id="labelEdu">שנות לימוד:</label>
+                        <input type="number" id="educationYears" oninput="updateProgress()" placeholder="12" 
+                            class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1" id="labelArmy">שירות צבאי:</label>
+                        <select id="armyService" onchange="updateProgress()" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                            <option value="בוצע">בוצע מלא</option>
+                            <option value="חלקי">שירות חלקי</option>
+                            <option value="לא בוצע">לא בוצע / פטור</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ניסיון תעסוקתי -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1" id="labelLastJob">תעסוקה אחרונה:</label>
+                    <input type="text" id="lastJob" oninput="updateProgress()" placeholder="איפה עבדת לאחרונה?" 
+                        class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1" id="labelJobYears">כמה שנים עבדת שם?</label>
+                    <input type="number" id="jobYears" oninput="updateProgress()" placeholder="שנות ותק" 
+                        class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1" id="labelLicense">סוג רישיון נהיגה:</label>
+                    <select id="licenseType" onchange="updateProgress()" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                        <option value="אין רישיון">אין רישיון</option>
+                        <option value="ידני">ידני (מתאים גם לאוטומט)</option>
+                        <option value="אוטומט בלבד">אוטומט בלבד</option>
+                    </select>
+                </div>
+
+                <!-- מאיפה הגיע (הצעה 3) -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1" id="labelSource">איך הגעת אלינו?</label>
+                    <select id="referralSource" onchange="updateProgress()" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                        <option value="פייסבוק / רשתות חברתיות">פייסבוק / רשתות חברתיות</option>
+                        <option value="חבר / המלצה">חבר / המלצה</option>
+                        <option value="שלט ברחוב">שלט ברחוב</option>
+                        <option value="אחר">אחר</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button onclick="sendWhatsApp()" id="btnSubmit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-md transform active:scale-95 transition-all flex items-center justify-center gap-2 text-lg">
+                שלח מועמדות
+            </button>
+        </div>
+
+        <!-- הודעת אישור -->
+        <div id="successMessage" class="hidden p-10 text-center space-y-4">
+            <div class="text-green-500 mx-auto w-16 h-16 border-4 border-green-500 rounded-full flex items-center justify-center">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800" id="successTitle">הפרטים נקלטו!</h2>
+            <p class="text-gray-600 font-medium" id="successDesc">כעת עוברים לוואטסאפ לשליחה סופית של המידע.</p>
+        </div>
+
+        <div id="msgBox" class="hidden m-6 p-3 bg-red-100 text-red-700 rounded-lg text-center text-sm font-bold"></div>
+
+        <div class="bg-gray-50 p-4 text-center text-[10px] text-gray-400 border-t">
+            ק.ק גנרטורים &copy; 2025
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'he';
+
+        const translations = {
+            he: {
+                title: 'ק.ק גנרטורים',
+                subtitle: 'הצטרפו לנבחרת המקצוענים שלנו',
+                name: 'שם מלא:',
+                phone: 'מספר טלפון:',
+                city: 'עיר מגורים:',
+                edu: 'שנות לימוד:',
+                army: 'שירות צבאי:',
+                lastJob: 'תעסוקה אחרונה:',
+                jobYears: 'כמה שנים עבדת שם?',
+                license: 'סוג רישיון נהיגה:',
+                source: 'איך הגעת אלינו?',
+                btn: 'שלח מועמדות',
+                successT: 'הפרטים נקלטו!',
+                successD: 'כעת עוברים לוואטסאפ לשליחה סופית.',
+                error: 'אנא מלא את שדות החובה'
+            },
+            ar: {
+                title: 'ق.ق للمولدات',
+                subtitle: 'انضم إلى فريق المحترفين لدينا',
+                name: 'الاسم الكامل:',
+                phone: 'رقم الهاتف:',
+                city: 'مدينة الإقامة:',
+                edu: 'سنوات الدراسة:',
+                army: 'الخدمة العسكرية:',
+                lastJob: 'العمل الأخير:',
+                jobYears: 'كم سنة عملت هناك؟',
+                license: 'نوع رخصة القيادة:',
+                source: 'كيف وصلت إلينا؟',
+                btn: 'إرسال الطلب',
+                successT: 'تم استلام التفاصيل!',
+                successD: 'سيتم نقلك الآن إلى واتساب لإرسال الطلب.',
+                error: 'يرجى ملء الحقول المطلوبة'
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            document.getElementById('titleText').innerText = t.title;
+            document.getElementById('subtitleText').innerText = t.subtitle;
+            document.getElementById('labelName').innerText = t.name;
+            document.getElementById('labelPhone').innerText = t.phone;
+            document.getElementById('labelCity').innerText = t.city;
+            document.getElementById('labelEdu').innerText = t.edu;
+            document.getElementById('labelArmy').innerText = t.army;
+            document.getElementById('labelLastJob').innerText = t.lastJob;
+            document.getElementById('labelJobYears').innerText = t.jobYears;
+            document.getElementById('labelLicense').innerText = t.license;
+            document.getElementById('labelSource').innerText = t.source;
+            document.getElementById('btnSubmit').innerText = t.btn;
+            document.getElementById('successTitle').innerText = t.successT;
+            document.getElementById('successDesc').innerText = t.successD;
+        }
+
+        function updateProgress() {
+            const fields = ['candidateName', 'candidatePhone', 'candidateCity', 'educationYears', 'lastJob', 'jobYears'];
+            let filled = 0;
+            fields.forEach(id => {
+                if (document.getElementById(id).value.trim() !== '') filled++;
+            });
+            const progress = (filled / fields.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function sendWhatsApp() {
+            const myNumber = "972535545532"; 
+            
+            const name = document.getElementById('candidateName').value.trim();
+            const phone = document.getElementById('candidatePhone').value.trim();
+            const city = document.getElementById('candidateCity').value.trim();
+            const edu = document.getElementById('educationYears').value.trim();
+            const army = document.getElementById('armyService').value;
+            const lastJob = document.getElementById('lastJob').value.trim();
+            const jobYears = document.getElementById('jobYears').value.trim();
+            const license = document.getElementById('licenseType').value;
+            const source = document.getElementById('referralSource').value;
+            const msgBox = document.getElementById('msgBox');
+
+            if (!name || !phone || !city || !lastJob) {
+                msgBox.innerText = translations[currentLang].error;
+                msgBox.classList.remove('hidden');
+                return;
+            }
+            msgBox.classList.add('hidden');
+
+            document.getElementById('formContainer').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+
+            const text = `*פנייה למועמדות - ק.ק גנרטורים*\n` +
+                         `----------------------------------\n` +
+                         `👤 שם המועמד: ${name}\n` +
+                         `📞 טלפון: ${phone}\n` +
+                         `📍 עיר: ${city}\n` +
+                         `📚 שנות לימוד: ${edu || "לא צוין"}\n` +
+                         `🇮🇱 שירות צבאי: ${army}\n` +
+                         `🚗 רישיון נהיגה: ${license}\n` +
+                         `📢 מקור הגעה: ${source}\n` +
+                         `----------------------------------\n` +
+                         `🏢 מקום עבודה אחרון: ${lastJob}\n` +
+                         `⏳ ותק במקום האחרון: ${jobYears || "0"} שנים\n\n` +
+                         `נא ליצור איתי קשר לתיאום ראיון.`;
+
+            setTimeout(() => {
+                window.location.href = `https://wa.me/${myNumber}?text=${encodeURIComponent(text)}`;
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
